@@ -1,6 +1,6 @@
 import { addonBuilder, AddonInterface, CatalogRequest, CatalogResponse, MetaPreview } from "stremio-addon-sdk";
 import { getDetails } from "./cinemeta";
-import { parseUserConfig } from "./config";
+import { COUNT_OPTIONS, parseUserConfig } from "./config";
 import { ContentType, Filters, hasFilters, ItemDetails, matchesFilters, matchesWatched } from "./filters";
 import { manifest } from "./manifest";
 import { getLibrary, LibraryItem } from "./stremioApi";
@@ -37,7 +37,9 @@ async function handleCatalog({ type, id, extra, config }: CatalogRequest): Promi
       (item) => item.type === catalogType && matchesWatched(extra.watched, item.watched),
     );
     const filters: Filters = { duration: extra.duration, period: extra.period };
-    const selections = await pickRandom(candidates, catalogType, filters, userConfig.count);
+    const requested = Number(extra.count);
+    const count = COUNT_OPTIONS.includes(requested) ? requested : userConfig.count;
+    const selections = await pickRandom(candidates, catalogType, filters, count);
     return { metas: selections.map(toMeta), cacheMaxAge: 0 };
   } catch (error) {
     console.error("Catalogue indisponible:", error);

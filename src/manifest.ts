@@ -18,6 +18,7 @@ export const manifest: Manifest = {
         { name: "duration", options: DURATION_OPTIONS.movie, isRequired: false },
         { name: "period", options: PERIOD_OPTIONS, isRequired: false },
         { name: "watched", options: WATCHED_OPTIONS, isRequired: false },
+        { name: "count", options: COUNT_OPTIONS.map(String), isRequired: false },
       ],
     },
     {
@@ -28,6 +29,7 @@ export const manifest: Manifest = {
         { name: "duration", options: DURATION_OPTIONS.series, isRequired: false },
         { name: "period", options: PERIOD_OPTIONS, isRequired: false },
         { name: "watched", options: WATCHED_OPTIONS, isRequired: false },
+        { name: "count", options: COUNT_OPTIONS.map(String), isRequired: false },
       ],
     },
   ],
