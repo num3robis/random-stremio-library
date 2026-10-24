@@ -9,12 +9,14 @@ Il ajoute deux catalogues dans Stremio (Découvrir) :
 
 Chaque catalogue affiche une sélection aléatoire d'éléments de ta bibliothèque, avec des filtres :
 
-- **Durée** : par exemple < 90 min, 90-120 min, > 2h30 pour les films ; < 30 min, 30-60 min, > 60 min pour les séries.
+- **Durée** : pour les films, par exemple < 90 min, 90-120 min, > 2h30.
+- **Saisons** : pour les séries, nombre de saisons (1 saison, 2 à 10 saisons max). Les spéciaux (saison 0) ne sont pas comptés.
 - **Période** : avant 1980, 1980-1999, 2000-2009, 2010-2019, 2020 et après.
-- **Vu / Pas vu** : filtre sur l'état de visionnage.
+- **Genre** : par exemple Action, Comédie, Drame, Horreur, Sci-Fi (les séries ont en plus Reality-TV, Talk-Show, Game-Show).
+- **Vu / Pas vu** : filtre sur l'état de visionnage. Par défaut, seuls les éléments non vus sont proposés.
 - **Nombre** : 1, 3, 5 ou 10 éléments.
 
-Les durées et années viennent de Cinemeta. Les éléments sans information de durée ou d'année sont exclus dès qu'un filtre correspondant est actif.
+Les durées, années, genres et saisons viennent de Cinemeta. Les éléments sans information correspondante sont exclus dès qu'un filtre correspondant est actif.
 
 ## Fonctionnement
 

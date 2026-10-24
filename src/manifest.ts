@@ -1,6 +1,6 @@
 import { Manifest } from "stremio-addon-sdk";
 import { COUNT_OPTIONS, DEFAULT_COUNT } from "./config";
-import { DURATION_OPTIONS, PERIOD_OPTIONS, WATCHED_OPTIONS } from "./filters";
+import { DURATION_OPTIONS, GENRE_OPTIONS, PERIOD_OPTIONS, SEASON_OPTIONS, WATCHED_OPTIONS } from "./filters";
 
 export const manifest: Manifest = {
   id: "com.pierreleclaire.random-library",
@@ -15,8 +15,9 @@ export const manifest: Manifest = {
       id: "random_movie",
       name: "Films au hasard",
       extra: [
-        { name: "duration", options: DURATION_OPTIONS.movie, isRequired: false },
+        { name: "duration", options: DURATION_OPTIONS, isRequired: false },
         { name: "period", options: PERIOD_OPTIONS, isRequired: false },
+        { name: "genre", options: GENRE_OPTIONS.movie, isRequired: false },
         { name: "watched", options: WATCHED_OPTIONS, isRequired: false },
         { name: "count", options: COUNT_OPTIONS.map(String), isRequired: false },
       ],
@@ -26,8 +27,9 @@ export const manifest: Manifest = {
       id: "random_series",
       name: "Séries au hasard",
       extra: [
-        { name: "duration", options: DURATION_OPTIONS.series, isRequired: false },
+        { name: "seasons", options: SEASON_OPTIONS, isRequired: false },
         { name: "period", options: PERIOD_OPTIONS, isRequired: false },
+        { name: "genre", options: GENRE_OPTIONS.series, isRequired: false },
         { name: "watched", options: WATCHED_OPTIONS, isRequired: false },
         { name: "count", options: COUNT_OPTIONS.map(String), isRequired: false },
       ],

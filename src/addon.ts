@@ -1,7 +1,7 @@
 import { addonBuilder, AddonInterface, CatalogRequest, CatalogResponse, MetaPreview } from "stremio-addon-sdk";
 import { getDetails } from "./cinemeta";
 import { COUNT_OPTIONS, parseUserConfig } from "./config";
-import { ContentType, Filters, hasFilters, ItemDetails, matchesFilters, matchesWatched } from "./filters";
+import { ContentType, DEFAULT_WATCHED, Filters, hasFilters, ItemDetails, matchesFilters, matchesWatched } from "./filters";
 import { manifest } from "./manifest";
 import { getLibrary, LibraryItem } from "./stremioApi";
 
@@ -34,9 +34,9 @@ async function handleCatalog({ type, id, extra, config }: CatalogRequest): Promi
   try {
     const library = await getLibrary(userConfig.authKey);
     const candidates = library.filter(
-      (item) => item.type === catalogType && matchesWatched(extra.watched, item.watched),
+      (item) => item.type === catalogType && matchesWatched(extra.watched ?? DEFAULT_WATCHED, item.watched),
     );
-    const filters: Filters = { duration: extra.duration, period: extra.period };
+    const filters: Filters = { duration: extra.duration, period: extra.period, genre: extra.genre, seasons: extra.seasons };
     const requested = Number(extra.count);
     const count = COUNT_OPTIONS.includes(requested) ? requested : userConfig.count;
     const selections = await pickRandom(candidates, catalogType, filters, count);

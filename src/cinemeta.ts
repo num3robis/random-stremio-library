@@ -8,6 +8,8 @@ interface CinemetaMeta {
   runtime?: string;
   year?: string;
   releaseInfo?: string;
+  genres?: string[];
+  videos?: { season?: number }[];
 }
 
 const cache = new Map<string, { details: ItemDetails; expires: number }>();
@@ -42,7 +44,16 @@ function parseMeta(meta: CinemetaMeta | undefined): ItemDetails {
   return {
     runtimeMinutes: parseRuntime(meta.runtime),
     year: parseYear(meta.year ?? meta.releaseInfo),
+    genres: meta.genres,
+    seasonCount: countSeasons(meta.videos),
   };
+}
+
+// Season 0 holds specials and is not counted.
+function countSeasons(videos: { season?: number }[] | undefined): number | undefined {
+  if (!videos) return undefined;
+  const seasons = new Set(videos.map((video) => video.season).filter((season) => season !== undefined && season > 0));
+  return seasons.size > 0 ? seasons.size : undefined;
 }
 
 export function parseRuntime(runtime: string | undefined): number | undefined {
